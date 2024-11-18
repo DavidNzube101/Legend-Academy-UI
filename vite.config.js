@@ -3,7 +3,17 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    {
+      postcss: {
+        plugins: [
+          require('tailwindcss'),
+          require('autoprefixer'),
+        ],
+      }
+    }
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')

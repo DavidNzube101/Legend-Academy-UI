@@ -26,6 +26,36 @@ const routes = [
     path: '/calendar',
     name: 'Calendar',
     component: () => import('@/views/Calendar.vue')
+  },
+  {
+    path: '/discussions',
+    name: 'Discussions',
+    component: () => import('@/views/Calendar.vue')
+  },
+  {
+    path: '/resources',
+    name: 'Resources',
+    component: () => import('@/views/Calendar.vue')
+  },
+  {
+    path: '/achievements',
+    name: 'Achievements',
+    component: () => import('@/views/Calendar.vue')
+  },
+  {
+    path: '/support',
+    name: 'Support',
+    component: () => import('@/views/Calendar.vue')
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import('@/views/Calendar.vue')
+  },
+  {
+    path: '/notification',
+    name: 'Notification',
+    component: () => import('@/views/Calendar.vue')
   }
 ]
 

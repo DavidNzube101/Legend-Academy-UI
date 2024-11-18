@@ -125,8 +125,8 @@ export default {
         instructor: "Joseph Brandon",
         duration: "24+ Hours",
         tag: "UI/UX",
-        thumbnail: "/placeholder.svg?height=160&width=320",
-        instructorImage: "/placeholder.svg?height=24&width=24"
+        thumbnail: "https://placehold.co/320x160",
+        instructorImage: "https://placehold.co/24"
       },
       {
         id: '2',
@@ -134,8 +134,8 @@ export default {
         instructor: "Joseph Brandon",
         duration: "24+ Hours",
         tag: "UI/UX",
-        thumbnail: "/placeholder.svg?height=160&width=320",
-        instructorImage: "/placeholder.svg?height=24&width=24"
+        thumbnail: "https://placehold.co/320x160",
+        instructorImage: "https://placehold.co/24"
       },
       {
         id: '3',
@@ -143,8 +143,8 @@ export default {
         instructor: "Joseph Brandon",
         duration: "24+ Hours",
         tag: "CODING",
-        thumbnail: "/placeholder.svg?height=160&width=320",
-        instructorImage: "/placeholder.svg?height=24&width=24"
+        thumbnail: "https://placehold.co/320x160",
+        instructorImage: "https://placehold.co/24"
       }
     ])
 
