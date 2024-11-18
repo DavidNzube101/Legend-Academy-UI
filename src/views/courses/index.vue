@@ -95,12 +95,12 @@ const courses = ref<Course[]>([
   {
     id: '1',
     title: "Beginner's Guide to becoming a professional UI/UX Designer",
-    thumbnail: "/placeholder.svg?height=192&width=384",
+    thumbnail: "https://placehold.co/284x192",
     instructor: {
       id: '1',
       name: 'Joseph Brandon',
       title: 'Senior UI/UX Designer',
-      avatar: "/placeholder.svg?height=24&width=24"
+      avatar: "https://placehold.co/24"
     },
     duration: '24+ Hours',
     tag: 'UI/UX',

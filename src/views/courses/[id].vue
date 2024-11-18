@@ -134,12 +134,12 @@ import type { Course, CourseModule, VideoContent, QuizContent, Question } from '
 const course = ref<Course>({
   id: '1',
   title: "Beginner's Guide to becoming a professional UI/UX Designer",
-  thumbnail: "/placeholder.svg?height=192&width=384",
+  thumbnail: "https://placehold.co/384x192",
   instructor: {
     id: '1',
     name: 'Joseph Brandon',
     title: 'Senior UI/UX Designer',
-    avatar: "/placeholder.svg?height=32&width=32"
+    avatar: "https://placehold.co/24"
   },
   duration: '24+ Hours',
   tag: 'UI/UX',

@@ -73,7 +73,7 @@
       <!-- Right Sidebar -->
       <aside class="fixed right-0 top-0 h-full w-64 bg-white border-l border-gray-200 p-4">
         <div class="flex flex-col items-center mb-6">
-          <img src="/placeholder.svg?height=64&width=64" alt="Profile" class="w-16 h-16 rounded-full mb-2" />
+          <img src="https://placehold.co/64" alt="Profile" class="w-16 h-16 rounded-full mb-2" />
           <h3 class="font-semibold">Chioma Favour</h3>
           <p class="text-sm text-gray-600">Student</p>
         </div>
@@ -163,8 +163,8 @@
       instructor: "Joseph Brandon",
       duration: "24+ Hours",
       tag: "UI/UX",
-      image: "/placeholder.svg?height=160&width=320",
-      instructorImage: "/placeholder.svg?height=24&width=24",
+      image: "https://placehold.co/320x160",
+      instructorImage: "https://placehold.co/24",
     },
     {
       id: 2,
@@ -172,8 +172,8 @@
       instructor: "Joseph Brandon",
       duration: "24+ Hours",
       tag: "UI/UX",
-      image: "/placeholder.svg?height=160&width=320",
-      instructorImage: "/placeholder.svg?height=24&width=24",
+      image: "https://placehold.co/320x160",
+      instructorImage: "https://placehold.co/24",
     },
     {
       id: 3,
@@ -181,8 +181,8 @@
       instructor: "Joseph Brandon",
       duration: "24+ Hours",
       tag: "CODING",
-      image: "/placeholder.svg?height=160&width=320",
-      instructorImage: "/placeholder.svg?height=24&width=24",
+      image: "https://placehold.co/320x160",
+      instructorImage: "https://placehold.co/24",
     },
   ]
   
