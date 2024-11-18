@@ -1,200 +1,249 @@
 <template>
-    <div class="min-h-screen bg-gray-50">
-      <!-- Left Sidebar -->
-      <aside class="fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 p-4">
-        <div class="flex items-center mb-8">
-          <h1 class="text-xl font-bold">Academy</h1>
+  <div class="min-h-screen bg-gray-50 p-6">
+    <!-- Welcome Section -->
+    <div class="mb-8">
+      <div class="bg-orange-500 text-white rounded-xl p-6 relative overflow-hidden">
+        <div class="relative z-10">
+          <h1 class="text-2xl font-bold mb-2">Welcome Back Favour!</h1>
+          <p class="mb-4">
+            Congratulations! you have learned 80% of your course this month. Keep it up, you're almost there.
+          </p>
+          <button class="bg-white text-orange-500 px-4 py-2 rounded-lg font-medium hover:bg-orange-50 transition-colors">
+            Continue Learning
+          </button>
         </div>
-        
-        <nav class="space-y-2">
-          <a v-for="item in navigationItems" 
-             :key="item.name"
-             :class="[
-               'flex items-center px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100',
-               item.name === 'Courses' ? 'bg-red-50 text-red-600' : ''
-             ]">
-            <component :is="item.icon" class="w-5 h-5 mr-3" />
-            {{ item.name }}
-          </a>
-        </nav>
-      </aside>
-  
-      <!-- Main Content -->
-      <main class="ml-64 p-8">
-        <!-- Search Bar -->
-        <div class="max-w-3xl mb-8 relative">
-          <input 
-            type="search"
-            placeholder="Search your course here..."
-            class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <!-- Decorative Elements -->
+        <div class="absolute right-0 bottom-0 opacity-10">
+          <div class="w-32 h-32 bg-white rounded-full -mb-16 -mr-16"></div>
         </div>
-  
-        <!-- Courses Section -->
-        <div class="mb-8">
-          <h2 class="text-xl font-semibold mb-4">Courses</h2>
-          <p class="text-gray-600 mb-6">View and manage your courses</p>
-  
-          <!-- Course Tabs -->
-          <div class="flex gap-4 mb-6">
-            <button 
-              v-for="tab in tabs" 
-              :key="tab.name"
-              :class="[
-                'px-4 py-2 rounded-lg text-sm',
-                tab.active ? 'bg-blue-50 text-blue-600' : 'text-gray-600'
-              ]"
-            >
-              {{ tab.name }} ({{ tab.count }})
+      </div>
+    </div>
+
+    <!-- Course Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div v-for="course in recentCourses" :key="course.id" 
+           class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+        <img :src="course.thumbnail" :alt="course.title" class="w-full h-40 object-cover" />
+        <div class="p-4">
+          <span class="text-xs font-medium text-blue-600 mb-2 block">{{ course.tag }}</span>
+          <h3 class="font-semibold mb-2">{{ course.title }}</h3>
+          <div class="flex items-center mb-3">
+            <img :src="course.instructorImage" :alt="course.instructor" class="w-6 h-6 rounded-full mr-2" />
+            <span class="text-sm text-gray-600">{{ course.instructor }}</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-500">{{ course.duration }}</span>
+            <button class="text-blue-600 hover:text-blue-700">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Dropdown -->
+    <div class="fixed top-4 right-4 z-50">
+      <div class="relative">
+        <button 
+          @click="toggleNotifications"
+          class="relative p-2 rounded-lg hover:bg-gray-100 transition-colors"
+          :class="{ 'bg-gray-100': showNotifications }"
+        >
+          <BellIcon class="w-6 h-6" />
+          <span v-if="unreadNotifications > 0" 
+                class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">
+            {{ unreadNotifications }}
+          </span>
+        </button>
+
+        <!-- Dropdown -->
+        <div v-if="showNotifications" 
+             class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+          <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+            <h3 class="font-semibold">Notifications</h3>
+            <button @click="markAllAsRead" 
+                    class="text-sm text-blue-600 hover:text-blue-700">
+              Mark all as read
             </button>
           </div>
-  
-          <!-- Course Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div v-for="course in courses" :key="course.id" class="bg-white rounded-xl shadow-sm overflow-hidden">
-              <img :src="course.image" :alt="course.title" class="w-full h-40 object-cover" />
-              <div class="p-4">
-                <span class="text-xs font-medium text-blue-600 mb-2 block">{{ course.tag }}</span>
-                <h3 class="font-semibold mb-2">{{ course.title }}</h3>
-                <div class="flex items-center mb-3">
-                  <img :src="course.instructorImage" alt="" class="w-6 h-6 rounded-full mr-2" />
-                  <span class="text-sm text-gray-600">{{ course.instructor }}</span>
+          
+          <div class="max-h-96 overflow-y-auto">
+            <div v-if="notifications.length === 0" class="p-4 text-center text-gray-500">
+              <BellOffIcon class="w-12 h-12 mx-auto mb-2 opacity-50" />
+              <p>No Recent Notifications</p>
+              <p class="text-sm">You'll be notified when there's something new</p>
+            </div>
+            
+            <div v-else v-for="notification in notifications" 
+                 :key="notification.id"
+                 class="p-4 border-b border-gray-100 hover:bg-gray-50"
+                 :class="{ 'bg-blue-50': !notification.read }">
+              <div class="flex gap-3">
+                <div class="flex-shrink-0">
+                  <component :is="getNotificationIcon(notification.type)" 
+                           class="w-5 h-5" 
+                           :class="getNotificationIconColor(notification.type)" />
                 </div>
-                <div class="flex items-center justify-between">
-                  <span class="text-sm text-gray-500">{{ course.duration }}</span>
-                  <button class="text-blue-600 hover:text-blue-700">Resume Course →</button>
+                <div>
+                  <p class="text-sm">{{ notification.message }}</p>
+                  <p class="text-xs text-gray-500 mt-1">{{ formatTime(notification.timestamp) }}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </main>
-  
-      <!-- Right Sidebar -->
-      <aside class="fixed right-0 top-0 h-full w-64 bg-white border-l border-gray-200 p-4">
-        <div class="flex flex-col items-center mb-6">
-          <img src="https://placehold.co/64" alt="Profile" class="w-16 h-16 rounded-full mb-2" />
-          <h3 class="font-semibold">Chioma Favour</h3>
-          <p class="text-sm text-gray-600">Student</p>
-        </div>
-  
-        <!-- Stats -->
-        <div class="grid grid-cols-3 gap-4 mb-6">
-          <div class="text-center">
-            <div class="text-xl font-semibold">24</div>
-            <div class="text-xs text-gray-600">Hours</div>
-          </div>
-          <div class="text-center">
-            <div class="text-xl font-semibold">85%</div>
-            <div class="text-xs text-gray-600">Grade</div>
-          </div>
-          <div class="text-center">
-            <div class="text-xl font-semibold">6</div>
-            <div class="text-xs text-gray-600">Courses</div>
-          </div>
-        </div>
-  
-        <!-- Task Progress -->
-        <div class="mb-6">
-          <h4 class="font-semibold mb-4">Task Progress</h4>
-          <div class="space-y-3">
-            <div v-for="task in tasks" :key="task.name" class="flex items-center">
-              <div class="w-full bg-gray-200 rounded-full h-2 mr-2">
-                <div class="bg-blue-600 h-2 rounded-full" :style="{ width: `${task.progress}%` }"></div>
-              </div>
-              <span class="text-xs text-gray-600 whitespace-nowrap">{{ task.progress }}%</span>
-            </div>
-          </div>
-        </div>
-  
-        <!-- To-do List -->
-        <div>
-          <h4 class="font-semibold mb-4">To-do List</h4>
-          <ul class="space-y-2">
-            <li v-for="todo in todos" :key="todo" class="flex items-center text-sm text-gray-600">
-              <input type="checkbox" class="mr-2" />
-              {{ todo }}
-            </li>
-          </ul>
-        </div>
-      </aside>
+      </div>
     </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue'
-  import { 
-    LayoutDashboard, 
-    GraduationCap, 
-    ClipboardList, 
-    Calendar,
-    MessageSquare,
-    FileText,
-    Trophy,
-    HelpCircle,
-    Settings,
-    Bell
-  } from 'lucide-vue-next'
-  
-  const navigationItems = [
-    { name: 'Dashboard', icon: LayoutDashboard },
-    { name: 'Courses', icon: GraduationCap },
-    { name: 'Assignments', icon: ClipboardList },
-    { name: 'Calendar', icon: Calendar },
-    { name: 'Discussions', icon: MessageSquare },
-    { name: 'Resources', icon: FileText },
-    { name: 'Achievements', icon: Trophy },
-    { name: 'Support', icon: HelpCircle },
-    { name: 'Settings', icon: Settings },
-    { name: 'Notification', icon: Bell },
-  ]
-  
-  const tabs = [
-    { name: 'All Courses', count: 11, active: true },
-    { name: 'Ongoing', count: 6 },
-    { name: 'Not Started', count: 2 },
-    { name: 'Completed', count: 3 },
-  ]
-  
-  const courses = [
-    {
-      id: 1,
-      title: "Beginner's Guide to becoming a professional UI/UX Designer",
-      instructor: "Joseph Brandon",
-      duration: "24+ Hours",
-      tag: "UI/UX",
-      image: "https://placehold.co/320x160",
-      instructorImage: "https://placehold.co/24",
-    },
-    {
-      id: 2,
-      title: "Advance your career, become a Senior UI/UX Designer",
-      instructor: "Joseph Brandon",
-      duration: "24+ Hours",
-      tag: "UI/UX",
-      image: "https://placehold.co/320x160",
-      instructorImage: "https://placehold.co/24",
-    },
-    {
-      id: 3,
-      title: "Front-End Web Developer Certificate Course",
-      instructor: "Joseph Brandon",
-      duration: "24+ Hours",
-      tag: "CODING",
-      image: "https://placehold.co/320x160",
-      instructorImage: "https://placehold.co/24",
-    },
-  ]
-  
-  const tasks = [
-    { name: 'Introduction to Figma', progress: 100 },
-    { name: 'Complete UI/UX Course', progress: 75 },
-    { name: 'Front-End Development', progress: 45 },
-  ]
-  
-  const todos = [
-    'Research interaction design',
-    'Introduction to UI/UX',
-    'Complete wireframe design',
-  ]
-  </script>
+  </div>
+</template>
+
+<script>
+import { ref, onMounted, onUnmounted } from 'vue'
+import { 
+  Bell as BellIcon, 
+  BellOff as BellOffIcon,
+  Trophy as TrophyIcon,
+  BookOpen as BookOpenIcon,
+  Calendar as CalendarIcon
+} from 'lucide-vue-next'
+
+export default {
+  name: 'Dashboard',
+  components: {
+    BellIcon,
+    BellOffIcon,
+    TrophyIcon,
+    BookOpenIcon,
+    CalendarIcon
+  },
+  setup() {
+    const showNotifications = ref(false)
+    const unreadNotifications = ref(2)
+
+    const recentCourses = ref([
+      {
+        id: '1',
+        title: "Beginner's Guide to becoming a professional UI/UX Designer",
+        instructor: "Joseph Brandon",
+        duration: "24+ Hours",
+        tag: "UI/UX",
+        thumbnail: "/placeholder.svg?height=160&width=320",
+        instructorImage: "/placeholder.svg?height=24&width=24"
+      },
+      {
+        id: '2',
+        title: "Advance your career, become a Senior UI/UX Designer",
+        instructor: "Joseph Brandon",
+        duration: "24+ Hours",
+        tag: "UI/UX",
+        thumbnail: "/placeholder.svg?height=160&width=320",
+        instructorImage: "/placeholder.svg?height=24&width=24"
+      },
+      {
+        id: '3',
+        title: "Front-End Web Developer Certificate Course",
+        instructor: "Joseph Brandon",
+        duration: "24+ Hours",
+        tag: "CODING",
+        thumbnail: "/placeholder.svg?height=160&width=320",
+        instructorImage: "/placeholder.svg?height=24&width=24"
+      }
+    ])
+
+    const notifications = ref([
+      {
+        id: '1',
+        type: 'achievement',
+        message: 'Congratulations! You have earned 100 Points',
+        timestamp: new Date(Date.now() - 20 * 60000),
+        read: false
+      },
+      {
+        id: '2',
+        type: 'assignment',
+        message: 'You have been assigned a new assignment',
+        timestamp: new Date(Date.now() - 45 * 60000),
+        read: false
+      },
+      {
+        id: '3',
+        type: 'course',
+        message: 'New course "Advanced UI Patterns" is available',
+        timestamp: new Date(Date.now() - 120 * 60000),
+        read: true
+      }
+    ])
+
+    const toggleNotifications = () => {
+      showNotifications.value = !showNotifications.value
+    }
+
+    const markAllAsRead = () => {
+      notifications.value = notifications.value.map(notification => ({
+        ...notification,
+        read: true
+      }))
+      unreadNotifications.value = 0
+    }
+
+    const getNotificationIcon = (type) => {
+      switch (type) {
+        case 'achievement':
+          return TrophyIcon
+        case 'course':
+          return BookOpenIcon
+        case 'assignment':
+          return CalendarIcon
+        default:
+          return BellIcon
+      }
+    }
+
+    const getNotificationIconColor = (type) => {
+      switch (type) {
+        case 'achievement':
+          return 'text-yellow-500'
+        case 'course':
+          return 'text-blue-500'
+        case 'assignment':
+          return 'text-green-500'
+        default:
+          return 'text-gray-500'
+      }
+    }
+
+    const formatTime = (date) => {
+      const minutes = Math.floor((Date.now() - date.getTime()) / 60000)
+      if (minutes < 60) return `${minutes}m ago`
+      if (minutes < 1440) return `${Math.floor(minutes / 60)}h ago`
+      return date.toLocaleDateString()
+    }
+
+    // Close notifications when clicking outside
+    const handleClickOutside = (event) => {
+      const target = event.target
+      if (!target.closest('.notification-dropdown')) {
+        showNotifications.value = false
+      }
+    }
+
+    onMounted(() => {
+      document.addEventListener('click', handleClickOutside)
+    })
+
+    onUnmounted(() => {
+      document.removeEventListener('click', handleClickOutside)
+    })
+
+    return {
+      showNotifications,
+      unreadNotifications,
+      recentCourses,
+      notifications,
+      toggleNotifications,
+      markAllAsRead,
+      getNotificationIcon,
+      getNotificationIconColor,
+      formatTime
+    }
+  }
+}
+</script>

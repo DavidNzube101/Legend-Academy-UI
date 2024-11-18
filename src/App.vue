@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="min-h-screen bg-gray-50">
+  <div id="app">
     <!-- Left Sidebar -->
     <aside class="fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 p-4">
       <div class="flex items-center mb-8">
@@ -27,8 +27,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script>
 import { 
   LayoutDashboard, 
   GraduationCap, 
@@ -42,25 +41,33 @@ import {
   Bell
 } from 'lucide-vue-next'
 
-export default defineComponent({
+export default {
   name: 'App',
-  setup() {
-    const navigationItems = [
-      { name: 'Dashboard', icon: LayoutDashboard },
-      { name: 'Courses', icon: GraduationCap },
-      { name: 'Assignments', icon: ClipboardList },
-      { name: 'Calendar', icon: Calendar },
-      { name: 'Discussions', icon: MessageSquare },
-      { name: 'Resources', icon: FileText },
-      { name: 'Achievements', icon: Trophy },
-      { name: 'Support', icon: HelpCircle },
-      { name: 'Settings', icon: Settings },
-      { name: 'Notification', icon: Bell },
-    ]
-
+  data() {
     return {
-      navigationItems
+      navigationItems: [
+        { name: 'Dashboard', icon: LayoutDashboard },
+        { name: 'Courses', icon: GraduationCap },
+        { name: 'Assignments', icon: ClipboardList },
+        { name: 'Calendar', icon: Calendar },
+        { name: 'Discussions', icon: MessageSquare },
+        { name: 'Resources', icon: FileText },
+        { name: 'Achievements', icon: Trophy },
+        { name: 'Support', icon: HelpCircle },
+        { name: 'Settings', icon: Settings },
+        { name: 'Notification', icon: Bell },
+      ]
     }
   }
-})
+}
 </script>
+
+<style>
+@import './styles/tailwind.css';
+@import './style.css';
+
+#app {
+  min-height: 100vh;
+  background-color: rgb(249, 250, 251);
+}
+</style>
