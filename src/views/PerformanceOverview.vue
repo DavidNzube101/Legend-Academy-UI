@@ -187,7 +187,7 @@ import { TrendingUpIcon, TrendingDownIcon } from 'lucide-vue-next'
 import type { PerformanceMetric, ModulePerformance, TestResult, PerformanceStats } from '@/types/performance'
 
 const stats = ref<PerformanceStats>({
-  totalTests: 16,
+  "totalTests": 16,
   totalPoints: 1000,
   testAwards: 1000
 })

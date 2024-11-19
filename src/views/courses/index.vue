@@ -108,6 +108,86 @@ const courses = ref<Course[]>([
     progress: 45,
     modules: []
   },
+  {
+    id: '2',
+    title: "Mastering React: From Beginner to Pro",
+    thumbnail: "https://placehold.co/284x192",
+    instructor: {
+      id: '2',
+      name: 'Jane Doe',
+      title: 'React Developer',
+      avatar: "https://placehold.co/24"
+    },
+    duration: '30+ Hours',
+    tag: 'Frontend Development',
+    description: '',
+    progress: 0,
+    modules: []
+  },
+  {
+    id: '3',
+    title: "The Complete JavaScript Course: From Zero to Hero",
+    thumbnail: "https://placehold.co/284x192",
+    instructor: {
+      id: '3',
+      name: 'John Smith',
+      title: 'JavaScript Developer',
+      avatar: "https://placehold.co/24"
+    },
+    duration: '50+ Hours',
+    tag: 'Programming Fundamentals',
+    description: '',
+    progress: 10,
+    modules: []
+  },
+  {
+    id: '4',
+    title: "Building Responsive Websites with Bootstrap 5",
+    thumbnail: "https://placehold.co/284x192",
+    instructor: {
+      id: '4',
+      name: 'Sarah Lee',
+      title: 'Front-End Developer',
+      avatar: "https://placehold.co/24"
+    },
+    duration: '15+ Hours',
+    tag: 'Front-End Development',
+    description: '',
+    progress: 75,
+    modules: []
+  },
+  {
+    id: '5',
+    title: "The Art of Web Design: Principles and Practices",
+    thumbnail: "https://placehold.co/284x192",
+    instructor: {
+      id: '5',
+      name: 'David Miller',
+      title: 'Web Designer',
+      avatar: "https://placehold.co/24"
+    },
+    duration: '20+ Hours',
+    tag: 'Web Design',
+    description: '',
+    progress: 20,
+    modules: []
+  },
+  {
+    id: '6',
+    title: "Backend Developer Full Course",
+    thumbnail: "https://placehold.co/284x192",
+    instructor: {
+      id: '1',
+      name: 'Sarah Cornrow',
+      title: 'Senior Backend Developer',
+      avatar: "https://placehold.co/24"
+    },
+    duration: '19+ Hours',
+    tag: 'Backend',
+    description: '',
+    progress: 88,
+    modules: []
+  },
   // Add more courses...
 ])
 

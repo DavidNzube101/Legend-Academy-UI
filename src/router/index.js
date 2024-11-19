@@ -30,7 +30,12 @@ const routes = [
   {
     path: '/discussions',
     name: 'Discussions',
-    component: () => import('@/views/Calendar.vue')
+    component: () => import('@/views/Discussions.vue')
+  },
+  {
+    path: '/performance-overview',
+    name: 'Performance',
+    component: () => import('@/views/PerformanceOverview.vue')
   },
   {
     path: '/resources',
@@ -40,17 +45,17 @@ const routes = [
   {
     path: '/achievements',
     name: 'Achievements',
-    component: () => import('@/views/Calendar.vue')
+    component: () => import('@/views/Achievements.vue')
   },
   {
     path: '/support',
     name: 'Support',
-    component: () => import('@/views/Calendar.vue')
+    component: () => import('@/views/Support.vue')
   },
   {
     path: '/settings',
     name: 'Settings',
-    component: () => import('@/views/Calendar.vue')
+    component: () => import('@/views/Settings.vue')
   },
   {
     path: '/notification',

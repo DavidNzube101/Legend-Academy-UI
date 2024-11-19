@@ -38,7 +38,8 @@ import {
   Trophy,
   HelpCircle,
   Settings,
-  Bell
+  Bell,
+  Gauge
 } from 'lucide-vue-next'
 
 export default {
@@ -49,6 +50,7 @@ export default {
         { name: 'Dashboard', icon: LayoutDashboard },
         { name: 'Courses', icon: GraduationCap },
         { name: 'Assignments', icon: ClipboardList },
+        { name: 'Performance', icon: Gauge },
         { name: 'Calendar', icon: Calendar },
         { name: 'Discussions', icon: MessageSquare },
         { name: 'Resources', icon: FileText },

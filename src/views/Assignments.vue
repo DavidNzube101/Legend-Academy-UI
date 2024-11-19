@@ -143,6 +143,39 @@ const assignments = ref<Assignment[]>([
     status: 'completed',
     courseName: 'UX/UI Advanced',
     duration: '8+ Hours'
+  },
+  {
+    id: '4',
+    courseId: '1',
+    title: "Building Strong Foundations: Wireframing Techniques",
+    thumbnail: "https://placehold.co/384x192",
+    assignedDate: '2024-11-18',
+    dueDate: '2024-11-21',
+    status: 'pending',
+    courseName: 'UI/UX Design Course',
+    duration: '4+ Hours'
+  },
+  {
+    id: '5',
+    courseId: '2',
+    title: "Building Responsive Layouts with CSS Grid",
+    thumbnail: "https://placehold.co/384x192",
+    assignedDate: '2024-11-16',
+    dueDate: '2024-11-23',
+    status: 'pending',
+    courseName: 'Web Development',
+    duration: '6+ Hours'
+  },
+  {
+    id: '6',
+    courseId: '3',
+    title: "Optimizing User Experience: Testing Strategies",
+    thumbnail: "https://placehold.co/384x192",
+    assignedDate: '2024-11-14',
+    dueDate: '2024-11-20',
+    status: 'completed',
+    courseName: 'UX/UI Advanced',
+    duration: '3+ Hours'
   }
 ])
 
